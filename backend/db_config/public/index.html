@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" />
+    <style>
+     .body{
+       overflow: hidden;
+       box-sizing: border-box;
+       padding: 0 !important;
+       margin: 0 !important;
+     }
+     .pane{
+        height: 100vh;
+        display: flex;
+      }
+      .top-panel{
+        background-color: #3c3e44;
+      }
+     .editor-container {
+        flex-grow: 1;
+        flex-basis: 0;
+        display: flex;
+        flex-direction: column;
+        padding: .5rem;
+        background-color: #3c3e44;
+      }
+      .expand-collapse-button {
+        margin-left: .5rem;
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+      }
+     .editor-title {
+        display: flex;
+        justify-content: space-between;
+        background: #1d1e20;
+        color: #fff;
+        padding: .5rem .5rem .5rem 1rem;
+        border-top-right-radius: .5rem;
+        border-top-left-radius: .5rem;
+      }
+     .code-mirror-wrapper {
+        flex-grow: 1;
+        border-bottom-right-radius: .5rem;
+        border-bottom-left-radius: .5rem;
+        overflow: hidden;
+      }
+     .sound{
+       display: none;
+     }
+     .container{
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      position: absolute;
+      justify-content: center;
+      z-index: 100;
+      top: 90vh;
+      width: 100%;
+     }
+     .cm-s-material.CodeMirror {
+        background-color: #263238;
+        color: #eff;
+      }
+     .CodeMirror {
+        height: 100%!important;
+      }
+     .CodeMirror {
+        position: relative;
+        overflow: hidden;
+        background: #fff;
+      }
+     .CodeMirror {
+        font-family: monospace;
+        height: 300px;
+        color: #000;
+        direction: ltr;
+      }
+     #pa{
+        display: none;
+      }
+     #pause{
+        display : none;
+      }
+     textarea{
+        width: 100%;
+        height: 100vh;
+        color: #eff;
+        background-color: transparent;
+        writing-mode:initial !important;
+      }
+      .cursor {
+        background: url(./cursor.svg);
+        width: 10px;
+        height: 10px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100000;
+      }
+      iframe{
+        width: 100%;
+        height: auto;
+      }
+      .click {
+        border-radius: 50%;
+        background: rgb(143, 143, 235);
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        z-index: 1000000;
+      }
+
+      .clicked {
+        border: 2px solid blue;
+        z-index: 1000000;
+      }
+      .button {
+        border: none;
+        outline: none;
+        background-color: #111;
+        padding: 0.9rem 1.5rem;
+        color: #fff;
+        font-weight: 600;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.15s ease all;
+        margin: 0 5px;
+      }
+      .button:hover {
+        opacity: 0.9;
+      }
+      .button:active {
+        transform: scale(0.95);
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 0 1.5rem;
+        transition: 0.5s easy all;
+      }
+      .modal .modal-container {
+        background-color: #fff;
+        max-width: 500px;
+        padding: 2rem;
+        margin: 10vh auto;
+        border-radius: 10px;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <div class ="pane top-panel">
+      <div class="editor-container">
+        <div class="editor-title">
+          HTML
+        </div>
+      
+        <div class="react-codemirror2 code-mirror-wrapper">
+        <div class="CodeMirror cm-s-material CodeMirror-wrap">
+          <div id="html">
+            <textarea id="htmltext" tabindex="0"></textarea>
+          </div>
+      </div>
+       </div>
+       </div>
+       <div class="editor-container">
+        <div class="editor-title">
+          CSS
+        </div>
+      
+        <div class="react-codemirror2 code-mirror-wrapper">
+        <div class="CodeMirror cm-s-material CodeMirror-wrap">
+          <div id="css">
+            <textarea id="csstext" tabindex="0"></textarea>
+          </div>
+      </div>
+       </div>
+       </div>
+       <div class="editor-container">
+        <div class="editor-title">
+          JS
+        </div>
+      
+        <div class="react-codemirror2 code-mirror-wrapper">
+        <div class="CodeMirror cm-s-material CodeMirror-wrap">
+          <div id="js">
+            <textarea id="jstext" tabindex="0"></textarea>
+          </div>
+      </div>
+       </div>
+       </div>
+    </div>
+    <div class="container">
+      <button class = "button" id="record">Record</button>
+      <button class = "button" id="play">Open Video Player</button>
+      <button class = "button" id="pa">Play</button>
+      <button class = "button" id="pause">Pause</button>
+      <button class = "button" id="compile">Compile</button>
+      <div class="sound">
+        <div id="formats">Format: start recording to see sample rate</div>
+        <p><strong>Recordings:</strong></p>
+        <ol id="recordingsList"></ol>
+      </div>
+      <div class="modal" id="modal-four">
+          <div class="modal-container modal-container-four"> 
+            <iframe id="iframe" srcdoc="web developement"></iframe>
+          </div>
+      </div>
+
+      
+    </div>
+    <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+    <script src="https://code.jquery.com/jquery-1.8.3.js"></script>
+    <script>
+     window.onload = function() {
+      var compile = document.getElementById("compile");
+      var d = document;
+      var q = "querySelector";
+      var iframe = d[q]("iframe");
+      var div = document.getElementById('divID');
+      compile.addEventListener("click",function(){
+        modal4.style.display = 'block';
+        modal_container_4.className = 'modal-container modal-container-four animate__animated animate__zoomIn';
+        iframe.srcdoc = area[0].value + '<style>' +
+        area[1].value + '</style>' + '<script>' +
+        area[2].value + '<\/script>';
+        
+      });
+
+      const modal4 = document.getElementById('modal-four');
+      const modal_container_4 = document.querySelector('.modal-container-four');
+
+
+      // We target all textarea
+      var area = document.querySelectorAll('textarea');
+ 
+      const modals = document.querySelectorAll('.modal');
+    window.addEventListener('click', (e) => {
+      modals.forEach(modal => {
+        if(e.target === modal){
+            modal.style.display = 'none';
+        }
+    })
+});
+    }
+    </script>
+    <script src="src/index.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "archive2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "fileapi": "^2.2.0",
+    "hbs": "^4.1.1",
+    "mongoose": "^5.11.14",
+    "node-localstorage": "^2.1.6",
+    "wav": "^1.0.2"
+  }
+}
