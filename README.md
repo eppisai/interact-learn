@@ -14,7 +14,7 @@
  </ui>
  <br>
 Need info About the Code? Docs will be updated soon, once project is completed.
-  or **Create an issue**
+  or Create an issue..
 
 
 <h3> Contact Us, In case of error or having problem setting up the project </h3>
