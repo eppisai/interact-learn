@@ -18,9 +18,9 @@ Need info About the Code? Docs will be updated soon, once project is completed
 
 
 <h3> Contact Us, In case of error or having problem setting up the project </h3>
-<li><a href = "https://www.facebook.com/thealpha.guy.1/"> Aman </a></li>
-<li><a href = "https://www.facebook.com/Palak.578"> Shantanu</a></li>
-<li><a href = "https://www.facebook.com/shantanu.shukla.71404/"> Palak</a></li>
+<li><a href = "https://www.linkedin.com/in/aman-singh-6884321a0/"> Aman </a></li>
+<li><a href = "https://www.linkedin.com/in/kumaripalak/"> Shantanu</a></li>
+<li><a href = "https://www.linkedin.com/in/shantanu-shukla-89a41818b/"> Palak</a></li>
 <li><a href = "https://www.linkedin.com/in/akashsaxena2308/"> Akash Saxena </a></li>
  <br>
 
