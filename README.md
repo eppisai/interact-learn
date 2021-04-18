@@ -5,7 +5,7 @@
 
 <ui>
   <li> git clone </li>
-  <li>cd intract&learn</li>
+  <li>cd intract-learn</li>
   <li> npm i </li>
   <li>cd frontend </li>
   <li>npm i </li>
