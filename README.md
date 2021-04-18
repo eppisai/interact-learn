@@ -13,7 +13,7 @@
   <li>npm run dev</li>
  </ui>
  <br>
-Need info About the Code? Docs will be updated soon, once project is completed.
+Need info About the Code? Docs will be updated soon, once project is completed
   or Create an issue..
 
 
