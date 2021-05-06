@@ -1,4 +1,4 @@
-<h1 align="center">Intract&Learn</h1> <br>
+<h1 align="center"> Intract&Learn</h1> <br>
 <p alig = "center">To revolutionary idea to enhance the learning of student by increasing the intractivity. We made a new way to record lecture and play them so that you can edit the running video and show your creativity.</p>
 
 <h2 align="center">Installing Dependencies and Running the platform</h2>
